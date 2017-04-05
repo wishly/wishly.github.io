@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>无缝滚动轮播</title>
+  <style>
+    *{
+      margin: 0;
+      padding: 0;
+    }
+    li{
+      list-style: none;
+    }
+    .box{
+      /*overflow: hidden;*/
+      position: relative;
+      width: 800px;
+      height: 450px;
+      margin: 100px auto;
+    }
+    .box ul.img{
+      position: relative;
+      top: 0;
+      left: -800px;
+      height: 450px;
+    }
+    .box ul.img li{
+      float: left;
+    }
+    .circle-btn{
+      position: absolute;
+      bottom: 30px;
+      left: 50%;
+      padding: 5px;
+      background: rgba(218, 218, 218, 0.7);
+      border-radius: 30px;
+    }
+    .circle-btn li{
+      float: left;
+      width: 15px;
+      height: 15px;
+      margin: 0 2px;
+      background: #69d2e4;
+      border-radius: 50%;
+      cursor: pointer;
+    }
+    .circle-btn li.on{
+      background: #fff;
+   }
+   i {
+      position: absolute;
+      top: 50%;
+      width: 40px;
+      height: 80px;
+      margin-top: -40px;
+      background: #69d2e4;
+      text-align: center;
+      line-height: 80px;
+      font-size: 30px;
+      font-style: normal;
+      color: #fff;
+      cursor: pointer;
+  }
+    i.prev{
+      left: 20px;
+    }
+    i.next{
+      right: 20px;
+    }
+  </style>
+</head>
+<body>
+  <div class="box">
+    <ul class="img">
+      <li><img src="http://file.xuanmomo.com/T3-lg.jpg" alt="" width="800" height="450"></li>
+      <li><img src="http://file.xuanmomo.com/T1-lg.jpg" alt="" width="800" height="450"></li>
+      <li><img src="http://file.xuanmomo.com/TT.jpg" alt="" width="800" height="450"></li>
+      <li><img src="http://file.xuanmomo.com/T2-lg.jpg" alt="" width="800" height="450"></li>
+      <li><img src="http://file.xuanmomo.com/T6-lg.jpg" alt="" width="800" height="450"></li>
+      <li><img src="http://file.xuanmomo.com/T3-lg.jpg" alt="" width="800" height="450"></li>
+      <li><img src="http://file.xuanmomo.com/T1-lg.jpg" alt="" width="800" height="450"></li>
+    </ul>
+    <ul class="circle-btn">
+      <li class="on"></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+    </ul>
+    <i class="prev">&lt;</i>
+    <i class="next">&gt;</i>
+  </div>
+  <script src="http://cdn.bootcss.com/jquery/2.1.4/jquery.min.js"></script>
+  <script>
+    var $ul = $('ul.img');
+    var $li = $('li',$ul);
+    var $btn = $('ul.circle-btn');
+    var $li_btn = $('li',$btn);
+    var i = 1;
+    var timer = null;
+    // 给图片ul计算宽度
+    $ul.css('width',$li.length * $li.width() + 'px');
+    // 给按钮ul计算margin
+    $btn.css('margin-left',$btn.width() / -2);
+    autoplay();
+    // 小圆点切换
+    $li_btn.click(function(){
+      if( !$ul.is(':animated') ){
+        i = $(this).index() + 1;
+        cut( $ul , $(this) , 1000 );
+      }
+    });
+    // 上一张
+    $('.prev').click(function(){
+      if( !$ul.is(':animated') ){
+        i--;
+        if( i < 0 ){
+          i = $li.length - 3;
+          $ul.css('left',($li.length - 2) * -$li.width() + 'px');
+        }
+        cut( $ul , $li_btn.eq(i - 1) , 1000 );
+      }
+    });
+    // 下一张
+    $('.next').click(function(){
+      if( !$ul.is(':animated') ){
+        i++;
+        if( i > $li.length - 1 ){
+          i = 2;
+          $ul.css('left',-$li.width() + 'px');
+        }else if( i > $li.length - 2 ){
+          $li_btn.eq(0).addClass('on').siblings().removeClass('on');
+        }
+        cut( $ul , $li_btn.eq(i - 1) , 1000 );
+      }
+    });
+    // 自动轮播
+    function autoplay(){
+      timer = setInterval(function(){
+        i++;
+        if( i > $li.length - 1 ){
+          i = 2;
+          $ul.css('left',-$li.width() + 'px');
+        }else if( i > $li.length - 2 ){
+          $li_btn.eq(0).addClass('on').siblings().removeClass('on');
+        }
+        cut( $ul , $li_btn.eq(i - 1) , 1000 );
+      },3000);
+    }
+    // 鼠标移到图片停止定时器
+    $('.box').hover(function(){
+      clearInterval( timer );
+    },function(){
+      autoplay();
+    });
+    function cut( obj_box , obj_btn , time ){
+      obj_btn.addClass('on').siblings().removeClass('on');
+      obj_box.animate({
+        'left' : i * -$li.width() + 'px'
+      },time);
+    }
+  </script>
+</body>
+</html>
