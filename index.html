@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>无缝滚动轮播</title>
+  <style>
+ * {
+    margin: 0;
+    padding: 0;
+  }
+  li {
+    list-style: none;
+  }
+  .box {
+    /*定位*/
+    position: relative;
+    margin: 100px auto;
+    /*盒模型*/
+    width: 800px;
+    height: 450px;
+    /*其他*/
+    overflow: hidden;
+  }
+  .box ul.img{
+    position: relative;
+    top: 0;
+    width: 4000px;
+    height: 450px;
+  }
+  .box ul.img li{
+    float: left;
+  }
+  .circle-btn {
+    position: absolute;
+    bottom: 30px;
+    left: 50%;
+    padding: 5px;
+    background: rgba(218, 218, 218, 0.7);
+    border-radius: 30px;
+  }
+  .circle-btn li {
+    float: left;
+    margin: 0 2px;
+    width: 15px;
+    height: 15px;
+    background: #69d2e4;
+    border-radius: 50%;
+    cursor: pointer;
+  }
+  .circle-btn li.on{
+    background: #fff;
+  }
+  i{
+    position: absolute;
+    top: 50%;
+    margin-top: -40px;
+    text-align: center;
+    line-height: 80px;
+    font-size: 30px;
+    font-style: normal;
+    width: 40px;
+    height: 80px;
+    background: #69d2e4;
+    color: #fff;
+    cursor: pointer;
+  }
+  i.prev {
+    left: 20px;
+  }
+  i.next {
+    right: 20px;
+  }
+  </style>
+  <script type="text/javascript">
+    window.onload = function(){
+        var box = document.getElementsByClassName("box");
+        var prev = box[0].getElementsByClassName("prev");
+        var next = box[0].getElementsByClassName("next");
+        next[0].onclick = function () {
+          imgNext();
+        }
+        prev[0].onclick = function (){
+          imgPrev();
+        }
+      }
+      function imgNext(){
+        var box = document.getElementsByClassName("box");
+        var img = box[0].getElementsByClassName("img");
+        // var oLi = img[0].getElementsByTagName("li");
+        // alert(img[0].offsetLeft);
+        // alert(parseInt(img[0].offsetLeft));
+        if(parseInt(img[0].offsetLeft) > -3200){
+          img[0].style.left =  parseInt(img[0].offsetLeft) + (-800) +"px";
+          // alert(img[0].style.left);
+        } 
+        else {
+          img[0].style.left =  0;
+        }
+     }
+     function imgPrev(){
+        var box = document.getElementsByClassName("box");
+        var img = box[0].getElementsByClassName("img");
+        if(parseInt(img[0].offsetLeft) < 0){
+          img[0].style.left =  parseInt(img[0].offsetLeft) + 800 +"px";
+        } 
+        else {
+          img[0].style.left =  -3200 + "px";
+        }
+   }
+
+  </script>
+</head>
+<body>
+  <div class="box">
+    <ul class="img">
+        <li><img src = "images/1.jpg" alt = "" width = "800" height="450"></li>
+        <li><img src = "images/2.jpg" alt = "" width = "800" height="450"></li>
+        <li><img src = "images/3.jpg" alt = "" width = "800" height="450"></li>
+        <li><img src = "images/4.jpg" alt = "" width = "800" height="450"></li>
+        <li><img src = "images/5.jpg" alt = "" width = "800" height="450"></li>
+    </ul>
+    <ul class="circle-btn">
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+    </ul>
+    <i class="prev">&lt;</i>
+    <i class="next">&gt;</i>
+  </div>
+</body>
+</html>
