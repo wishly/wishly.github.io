@@ -73,44 +73,7 @@
     right: 20px;
   }
   </style>
-  <script type="text/javascript">
-    window.onload = function(){
-        var box = document.getElementsByClassName("box");
-        var prev = box[0].getElementsByClassName("prev");
-        var next = box[0].getElementsByClassName("next");
-        next[0].onclick = function () {
-          imgNext();
-        }
-        prev[0].onclick = function (){
-          imgPrev();
-        }
-      }
-      function imgNext(){
-        var box = document.getElementsByClassName("box");
-        var img = box[0].getElementsByClassName("img");
-        // var oLi = img[0].getElementsByTagName("li");
-        // alert(img[0].offsetLeft);
-        // alert(parseInt(img[0].offsetLeft));
-        if(parseInt(img[0].offsetLeft) > -3200){
-          img[0].style.left =  parseInt(img[0].offsetLeft) + (-800) +"px";
-          // alert(img[0].style.left);
-        } 
-        else {
-          img[0].style.left =  0;
-        }
-     }
-     function imgPrev(){
-        var box = document.getElementsByClassName("box");
-        var img = box[0].getElementsByClassName("img");
-        if(parseInt(img[0].offsetLeft) < 0){
-          img[0].style.left =  parseInt(img[0].offsetLeft) + 800 +"px";
-        } 
-        else {
-          img[0].style.left =  -3200 + "px";
-        }
-   }
-
-  </script>
+ 
 </head>
 <body>
   <div class="box">
@@ -131,5 +94,139 @@
     <i class="prev">&lt;</i>
     <i class="next">&gt;</i>
   </div>
+   <script type="text/javascript">
+    var pointUl = document.getElementsByClassName('circle-btn');
+    var pointLi = pointUl[0].getElementsByTagName('li');
+    var box = document.getElementsByClassName("box");
+    var prev = box[0].getElementsByClassName("prev");
+    var next = box[0].getElementsByClassName("next");
+    var img = box[0].getElementsByClassName("img");
+    window.onload = function(){
+        pointArr(Math.abs(parseInt(img[0].offsetLeft)) / 800);
+        next[0].onclick = function () {
+          imgNext();
+          pointArr(Math.abs(parseInt(img[0].offsetLeft)) / 800);
+        }
+        prev[0].onclick = function (){
+          imgPrev();
+          pointArr(Math.abs(parseInt(img[0].offsetLeft)) / 800);
+        }
+        for(var i = 0; i < pointLi.length; i++){
+          pointLi[i].index = i;
+          pointLi[i].onclick = function () {
+              for(var i=0; i < pointLi.length; i++){
+                pointLi[i].className = "";
+              }
+              this.className = "on";
+              img[0].style.left =  this.index * (-800) +"px";
+          }
+        }
+      }
+      function imgNext(){
+        // var box = document.getElementsByClassName("box");
+        // var img = box[0].getElementsByClassName("img");
+        // var oLi = img[0].getElementsByTagName("li");
+        // alert(img[0].offsetLeft);
+        // alert(parseInt(img[0].offsetLeft));
+        if(parseInt(img[0].offsetLeft) > -3200){
+          img[0].style.left =  parseInt(img[0].offsetLeft) - 800 +"px";
+          // alert(img[0].style.left);
+        } 
+        else {
+          img[0].style.left =  0;
+        }
+     }
+     function imgPrev(){
+        // var box = document.getElementsByClassName("box");
+        // var img = box[0].getElementsByClassName("img");
+        if(parseInt(img[0].offsetLeft) < 0){
+          img[0].style.left =  parseInt(img[0].offsetLeft) + 800 +"px";
+        } 
+        else {
+          img[0].style.left =  -3200 + "px";
+        }
+   }
+   function pointArr(index){
+      for(var i in pointLi){
+          if(index == i){
+            pointLi[i].className = "on";
+          }
+          else {
+            pointLi[i].className = "";
+          }
+      }
+
+   }
+  </script>
+<!--   <script src="http://cdn.bootcss.com/jquery/2.1.4/jquery.min.js"></script>
+  <script>
+    var $ul = $('ul.img');
+    var $li = $('li',$ul);
+    var $btn = $('ul.circle-btn');
+    var $li_btn = $('li',$btn);
+    var i = 1;
+    var timer = null;
+    // 给图片ul计算宽度
+    $ul.css('width',$li.length * $li.width() + 'px');
+    // 给按钮ul计算margin
+    $btn.css('margin-left',$btn.width() / -2);
+    autoplay();
+    // 小圆点切换
+    $li_btn.click(function(){
+      if( !$ul.is(':animated') ){
+        i = $(this).index() + 1;
+        cut( $ul , $(this) , 1000 );
+      }
+    });
+    // 上一张
+    $('.prev').click(function(){
+      if( !$ul.is(':animated') ){
+        i--;
+        if( i < 0 ){
+          i = $li.length - 3;
+          $ul.css('left',($li.length - 2) * -$li.width() + 'px');
+        }
+        cut( $ul , $li_btn.eq(i - 1) , 1000 );
+      }
+    });
+    // 下一张
+    $('.next').click(function(){
+      if( !$ul.is(':animated') ){
+        i++;
+        if( i > $li.length - 1 ){
+          i = 2;
+          $ul.css('left',-$li.width() + 'px');
+        }else if( i > $li.length - 2 ){
+          $li_btn.eq(0).addClass('on').siblings().removeClass('on');
+        }
+        cut( $ul , $li_btn.eq(i - 1) , 1000 );
+      }
+    });
+    // 自动轮播
+    function autoplay(){
+      timer = setInterval(function(){
+        i++;
+        if( i > $li.length - 1 ){
+          i = 2;
+          $ul.css('left',-$li.width() + 'px');
+        }else if( i > $li.length - 2 ){
+          $li_btn.eq(0).addClass('on').siblings().removeClass('on');
+        }
+        cut( $ul , $li_btn.eq(i - 1) , 1000 );
+      },3000);
+    }
+    // 鼠标移到图片停止定时器
+    $('.box').hover(function(){
+      clearInterval( timer );
+    },function(){
+      autoplay();
+    });
+    function cut( obj_box , obj_btn , time ){
+      obj_btn.addClass('on').siblings().removeClass('on');
+      obj_box.animate({
+        'left' : i * -$li.width() + 'px'
+      },time);
+    }
+  </script> -->
 </body>
 </html>
