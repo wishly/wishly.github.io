@@ -1,0 +1,89 @@
+* {
+	margin: 0;
+	padding: 0;
+}
+body {
+	font-size: 12px;
+	font-family: Arial;
+}
+span {
+	display: block;
+}
+div.footer {
+	width: 1000px;
+	margin: 50px auto;
+}
+div.image {
+	margin: 0 auto;
+	width: 900px;
+	border-top: 1px solid #a4a4a4;
+	border-bottom: 1px solid #a4a4a4;
+	padding: 10px 0;
+	cursor: pointer;
+}
+div.image img{
+	width: 900px;
+}
+div.footerDiv1 {
+	width: 900px;
+	margin: 30px auto;
+}
+div.shopguide {
+	float: left;
+	width: 178px;
+}
+div.shopguide span {
+	font-size: 18px;
+	font-weight: bold;
+}
+a {
+	color: #999;
+}
+div.footerLink a {
+	display: block;
+	margin-top: 3px;
+}
+a:hover {
+	text-decoration: none;
+	color: #c40000;
+}
+div.clear {
+	clear: both;
+}
+div.footerDiv2 {
+	width: 1000px;
+	background-color: black;
+	border-top: 2px solid #c40000;
+}
+div.tmLogo {
+	margin-left: 40px;
+	width: 900px;
+}
+div.whiteLink {
+	margin: 20px 3px;
+}
+div.whiteLink a {
+	color: white;
+	margin: 10px;
+}
+div.whiteLink a:hover {
+	color: #c40000;
+}
+span.slash {
+	display: inline;
+	color: white;
+}
+div.license {
+	margin-left: 10px;
+}
+div.license span {
+	display: inline;
+	color: #999;
+}
+div.copyRightYear {
+	margin-top: 10px;
+}
+div.licenseImage {
+	margin-top: 10px;
+	padding-bottom: 30px;
+}

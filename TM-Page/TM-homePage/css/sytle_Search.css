@@ -1,0 +1,101 @@
+* {
+	margin: 0;
+	padding: 0;
+}
+body {
+	font-size: 12px;
+	font-family: Arial;
+}
+div.categoryWithCarousel {
+    width: 100%;
+    position: relative;
+}
+div.headbar {
+	position: relative;
+	width: 100%;
+	background-color: #DD2727;
+	height: 36px;
+}
+div.head-content {
+	width: 200px;
+	height: 36px;
+	line-height: 36px;
+	color: white;
+	font-size: 16px;
+	font-weight: bold;
+	background-color: #C60A0A;
+	margin-left: 20px;
+	display: inline-block;
+}
+div.head-content span {
+	padding-left: 10px;
+}
+div.rightMenu {
+	display: inline-block;
+	background-color: #DD2727;
+	line-height: 36px;
+	height: 36px;
+	color: white;
+}
+div.rightMenu a {
+	margin: 0px 20px 0px 20px;
+	color: white;
+	text-decoration: none;
+}
+#catear {
+	position: absolute;
+	height: 15px;
+	display: none;
+	/*top: 38px;*/
+}
+div#myCarousel {
+	position: relative;
+	height: 510px;
+}
+div.item img {
+	height: 510px !important;
+}
+div.side-menu {
+	position: absolute;
+	width: 200px;
+	top: 86px;
+	background-color: #e2e2e3;
+	margin-left: 20px;
+}
+div.side-menu div.side-menu-list {
+	padding-left: 10px;
+	line-height: 30px;
+	font-size: 14px;
+}
+a {
+	color: #999;
+	text-decoration: none;
+}
+div.side-menu-list a {
+	text-decoration: none;
+}
+div.side-menu-list:hover {
+	background-color: white;
+}
+div.side-menu-content {
+	position: absolute;
+	width: 800px;
+	height: 510px;
+	top: 86px;
+	left: 220px;
+	background-color: white;
+}
+div.row {
+	margin: 20px 80px 0px 80px;
+}
+div.row a {
+	margin: 0 10px;
+}
+div.row a:hover {
+	color: #c40000;
+	text-decoration: none;
+}
+div.seperator {
+	margin-top: 20px;
+    border-bottom: 1px dashed #e7e7e7;
+}

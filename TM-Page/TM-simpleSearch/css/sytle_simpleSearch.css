@@ -1,0 +1,56 @@
+* {
+	margin: 0;
+	pading: 0;
+}
+body {
+	font-size: 12px;
+	font-family: Arial;
+}
+div.simpleSearchDiv {
+	width: 400px;
+	height: 40px;
+	margin: 50px auto;
+	background-color: #c40000;
+	padding: 1px;
+	display: block;
+	outline: none;
+}
+div.simpleSearchDiv input {
+	width: 275px;
+	height: 36px;
+	border: 1px solid transparent;
+	margin: 1px;
+	font-size: 18px;
+	outline: none;
+}
+div.simpleSearchDiv button {
+	width: 116px;
+	height: 36px;
+	background-color: #c40000;
+	border: 1px solid transparent;
+	font-size: 18px;
+	font-weight: bold;
+	color: white;
+	vertical-align: top;
+}
+a {
+	color: #999;
+}
+a:hover {
+	color: #c40000;
+	text-decoration: none;
+}
+div.simpleSearchBelow {
+	margin-top: 3px;
+	margin-left: -20px;
+}
+div.simpleSearchBelow a {
+	padding: 0 20px 0 20px;
+}
+img.logo {
+	position: absolute;
+	top: 50px;
+	left: 200px;
+	z-index: -1;
+}
+
